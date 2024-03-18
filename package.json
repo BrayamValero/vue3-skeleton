@@ -34,7 +34,8 @@
     ".": {
       "import": "./dist/vue3-skeleton.js",
       "require": "./dist/vue3-skeleton.umd.js"
-    }
+    },
+    "./style.css": "./dist/style.css"
   },
   "types": "./dist/index.d.ts",
   "files": [
