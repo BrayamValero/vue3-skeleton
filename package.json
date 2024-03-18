@@ -1,8 +1,7 @@
 {
   "name": "@brayamvalero/vue3-skeleton",
   "description": "An elegan skeleton library compatible with Vue 3",
-  "private": false,
-  "version": "0.0.1",
+  "version": "0.0.4",
   "type": "module",
   "author": "Brayam Valero",
   "keywords": [
@@ -18,7 +17,7 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@types/node": "^20.11.28",
@@ -29,15 +28,15 @@
     "vue": "^3.4.21",
     "vue-tsc": "^1.8.27"
   },
-  "main": "./dist/vue3-skeleton.umd.js",
+  "main": "./dist/vue3-skeleton.umd.cjs",
   "module": "./dist/vue3-skeleton.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue3-skeleton.esm.js",
-      "require": "./dist/vue3-skeleton.js"
+      "import": "./dist/vue3-skeleton.js",
+      "require": "./dist/vue3-skeleton.umd.js"
     }
   },
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "src"
