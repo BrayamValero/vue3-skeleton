@@ -21,4 +21,13 @@ export default defineConfig({
       },
     },
   },
+  // Exclude public directory from build
+  publicDir: false,
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "./src"),
+      "@components": resolve(__dirname, "./src/components"),
+      "@lib": resolve(__dirname, "./node_modules"),
+    },
+  },
 });
