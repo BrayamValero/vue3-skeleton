@@ -10,13 +10,13 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "Vue3Skeleton",
-      fileName: "vue3-skeleton",
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
       external: ["vue"],
       output: {
         globals: {
-          vue: "Vue",
+          Vue: "Vue",
         },
       },
     },
