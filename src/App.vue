@@ -1,24 +1,25 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import Skeleton from '@components/Skeleton.vue'
+import SkeletonTheme from '@components/SkeletonTheme.vue'
+
+const isEnabled = ref(false)
+
+const toggleProps = () => {
+    console.log('Toggled...')
+    isEnabled.value = !isEnabled.value
+}
 </script>
 
 <template>
     <div>
-        <h1>
-            <Skeleton :width="90" :rows="3" />
-        </h1>
-        <h1>
-            <Skeleton :width="90" :rows="3" inline />
-        </h1>
-        <div class="avatar">
-            <Skeleton child-class="avatar" circle />
-        </div>
-        <h1 class="mb-4">
-            <Skeleton width="200" height="200" />
-        </h1>
-        <p>
-            <Skeleton :rows="3" animation-direction="alternate" />
-        </p>
+        <SkeletonTheme :enable-animation="isEnabled">
+            <p>
+                <Skeleton :rows="3" inline />
+            </p>
+        </SkeletonTheme>
+
+        <button @click="toggleProps">Toggle Props</button>
     </div>
 </template>
 

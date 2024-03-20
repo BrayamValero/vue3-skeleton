@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
+
+const themeProps = inject('themeProps', {})
 
 interface Props {
     rows?: number
@@ -18,15 +20,18 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+    // Skeleton Default Props...
     rows: 1,
+    // SkeletonTheme Default Props...
+    baseColor: '#ebebeb',
+    highlightColor: '#f5f5f5',
     width: '100%',
     height: 'inherit',
     borderRadius: '0.25rem',
-    baseColor: '#ebebeb',
-    highlightColor: '#f5f5f5',
     animationDuration: 1.5,
     animationDirection: 'normal',
     enableAnimation: true,
+    inline: false,
 })
 
 // Computed => Formatting Data
@@ -42,10 +47,12 @@ const getRoundedCircle = computed<string | boolean>(() => (props.circle ? 'skele
 
 <template>
     <span class="skeleton-container" :class="[containerClass]">
-        <template v-for="index in rows" :key="'skeleton-loading-' + index">
+        <pre>Child ThemeProps: {{ themeProps }}</pre>
+        <pre>Child Props: {{ props }}</pre>
+        <!-- <template v-for="index: number in rows" :key="'skeleton-loading-' + index">
             <span class="skeleton-loading" :class="[childClass, getRoundedCircle]" v-html="'&zwnj;'"></span>
             <br v-if="!inline" />
-        </template>
+        </template> -->
     </span>
 </template>
 
