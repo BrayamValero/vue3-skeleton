@@ -1,44 +1,44 @@
 {
-  "name": "@brayamvalero/vue3-skeleton",
-  "description": "An elegan skeleton library compatible with Vue 3",
-  "version": "0.0.18",
-  "author": "Brayam Valero",
-  "keywords": [
-    "vue",
-    "vue3",
-    "skeleton",
-    "component",
-    "library"
-  ],
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
-  },
-  "peerDependencies": {
-    "vue": "^3.4.21"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.28",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.6",
-    "vite-plugin-dts": "^3.7.3",
-    "vue": "^3.4.21",
-    "vue-tsc": "^1.8.27"
-  },
-  "type": "module",
-  "main": "./dist/vue3-skeleton.umd.cjs",
-  "module": "./dist/vue3-skeleton.js",
-  "exports": {
-    ".": {
-      "import": "./dist/vue3-skeleton.js",
-      "require": "./dist/vue3-skeleton.umd.cjs"
+    "name": "@brayamvalero/vue3-skeleton",
+    "description": "An elegan skeleton library compatible with Vue 3",
+    "version": "0.0.1",
+    "author": "Brayam Valero",
+    "keywords": [
+        "vue",
+        "vue3",
+        "skeleton",
+        "component",
+        "library"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "preview": "vite preview"
     },
-    "./style.css": "./dist/style.css"
-  },
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ]
+    "peerDependencies": {
+        "vue": "^3.4.21"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.28",
+        "@vitejs/plugin-vue": "^5.0.4",
+        "typescript": "^5.2.2",
+        "vite": "^5.1.6",
+        "vite-plugin-dts": "^3.7.3",
+        "vue": "^3.4.21",
+        "vue-tsc": "^1.8.27"
+    },
+    "type": "module",
+    "main": "./dist/vue3-skeleton.umd.cjs",
+    "module": "./dist/vue3-skeleton.js",
+    "exports": {
+        ".": {
+            "import": "./dist/vue3-skeleton.js",
+            "require": "./dist/vue3-skeleton.umd.cjs"
+        },
+        "./style.css": "./dist/style.css"
+    },
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ]
 }

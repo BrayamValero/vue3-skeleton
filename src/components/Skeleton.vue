@@ -3,8 +3,10 @@ import { computed } from 'vue'
 
 interface Props {
     rows?: number
-    width?: number
-    height?: number
+    width?: string | number
+    height?: string | number
+    borderRadius?: string | number
+    circle?: boolean
     containerClass?: string
     childClass?: string
     baseColor?: string
@@ -12,10 +14,14 @@ interface Props {
     animationDuration?: number
     animationDirection?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse'
     enableAnimation?: boolean
+    inline?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
     rows: 1,
+    width: '100%',
+    height: 'inherit',
+    borderRadius: '0.25rem',
     baseColor: '#ebebeb',
     highlightColor: '#f5f5f5',
     animationDuration: 1.5,
@@ -24,21 +30,22 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 // Computed => Formatting Data
-const getHeight = computed<string>(() => (props.height ? `${props.height}px` : 'inherit'))
-const getWidth = computed<string>(() => (props.width ? `${props.width}px` : '100%'))
+const getHeight = computed<string>(() => (typeof props.height === 'number' ? `${props.height}px` : props.height))
+const getWidth = computed<string>(() => (typeof props.width === 'number' ? `${props.width}px` : props.width))
+const getBorderRadius = computed<string>(() =>
+    typeof props.borderRadius === 'number' ? `${props.borderRadius}px` : props.borderRadius
+)
 const getAnimationDuration = computed<string>(() => `${props.animationDuration}s`)
 const getAnimationStatus = computed<string>(() => (props.enableAnimation ? 'block' : 'none'))
+const getRoundedCircle = computed<string | boolean>(() => (props.circle ? 'skeleton-loading-circle' : false))
 </script>
 
 <template>
     <span class="skeleton-container" :class="[containerClass]">
-        <span
-            v-for="index in rows"
-            class="skeleton-loading"
-            :class="[childClass]"
-            :key="'skeleton-loading-' + index"
-            v-html="'&zwnj;'"
-        ></span>
+        <template v-for="index in rows" :key="'skeleton-loading-' + index">
+            <span class="skeleton-loading" :class="[childClass, getRoundedCircle]" v-html="'&zwnj;'"></span>
+            <br v-if="!inline" />
+        </template>
     </span>
 </template>
 
@@ -59,12 +66,16 @@ const getAnimationStatus = computed<string>(() => (props.enableAnimation ? 'bloc
     background-color: var(--base-color);
     width: v-bind(getWidth);
     height: v-bind(getHeight);
-    border-radius: 0.25rem;
+    border-radius: v-bind(getBorderRadius);
     display: inline-flex;
     line-height: 1;
     position: relative;
     user-select: none;
     overflow: hidden;
+}
+
+.skeleton-loading.skeleton-loading-circle {
+    border-radius: 50%;
 }
 
 .skeleton-loading::after {
