@@ -1,8 +1,9 @@
 {
     "name": "@brayamvalero/vue3-skeleton",
     "description": "An elegant skeleton library compatible with Vue 3",
-    "version": "0.0.1",
+    "version": "0.0.21",
     "author": "Brayam Valero",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/BrayamValero/vue3-skeleton"
@@ -37,13 +38,6 @@
     "type": "module",
     "main": "./dist/vue3-skeleton.umd.cjs",
     "module": "./dist/vue3-skeleton.js",
-    "exports": {
-        ".": {
-            "import": "./dist/vue3-skeleton.js",
-            "require": "./dist/vue3-skeleton.umd.cjs"
-        },
-        "./style.css": "./dist/style.css"
-    },
     "types": "./dist/index.d.ts",
     "files": [
         "dist"
