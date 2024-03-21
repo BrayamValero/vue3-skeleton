@@ -1,5 +1,5 @@
 // keys.ts
 import type { InjectionKey } from 'vue'
-import { SkeletonThemeProps } from '@/types/index.types'
+import { type SkeletonThemeProps } from '@/types/index.types'
 
-export const themeInjection = Symbol() as InjectionKey<SkeletonThemeProps>
+export const ThemeInjection = Symbol() as InjectionKey<SkeletonThemeProps>

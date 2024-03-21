@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { inject, computed } from 'vue'
-import { themeInjection } from '@/utils/keys'
-import { SkeletonProps } from '@/types/index.types'
+import { ThemeInjection } from '@/utils/keys'
+import { type SkeletonProps } from '@/types/index.types'
 
 const props = withDefaults(defineProps<SkeletonProps>(), {
     rows: 1,
@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
     inline: undefined,
 })
 
-const theme = inject(themeInjection, {})
+const theme = inject(ThemeInjection, {})
 
 // Hack AKA Tweak => Computed Props with default values
 const _props = computed(() => {
@@ -62,8 +62,13 @@ const getRows = computed<number>(() => {
 
 <template>
     <span class="skeleton-container" :class="[containerClass]">
-        <template v-for="index: number in getRows" :key="'skeleton-loading-' + index">
-            <span class="skeleton-loading" :class="[childClass, getRoundedCircle]" v-html="'&zwnj;'"></span>
+        <template v-for="index in getRows">
+            <span
+                :id="'skele_' + index"
+                class="skeleton-loading"
+                :class="[childClass, getRoundedCircle]"
+                v-html="'&zwnj;'"
+            ></span>
             <br v-if="!inline" />
         </template>
     </span>

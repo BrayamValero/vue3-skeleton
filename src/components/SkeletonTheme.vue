@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { themeInjection } from '@/utils/keys'
-import { SkeletonThemeProps } from '@/types/index.types'
+import { type SkeletonThemeProps } from '@/types/index.types'
+import { ThemeInjection } from '@/utils/keys'
 import { provide } from 'vue'
 
 const props = withDefaults(defineProps<SkeletonThemeProps>(), {
@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<SkeletonThemeProps>(), {
     inline: undefined,
 })
 
-provide(themeInjection, props)
+provide(ThemeInjection, props)
 </script>
 
 <template>
