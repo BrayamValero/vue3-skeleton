@@ -1,29 +1,48 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import Skeleton from '@components/Skeleton.vue'
+import SkeletonTheme from '@components/SkeletonTheme.vue'
+
+const isEnabled = ref(true)
+
+const toggleProps = () => {
+    isEnabled.value = !isEnabled.value
+}
 </script>
 
 <template>
     <div>
-        <h1>
-            <Skeleton :width="90" :rows="3" />
-        </h1>
-        <h1>
-            <Skeleton :width="90" :rows="3" inline />
-        </h1>
-        <div class="avatar">
-            <Skeleton child-class="avatar" circle />
+        <picture class="avatar">
+            <Skeleton circle :width="70" :height="70" />
+        </picture>
+        <SkeletonTheme :enable-animation="isEnabled">
+            <h1><Skeleton /></h1>
+            <h2><Skeleton /></h2>
+            <p>
+                <Skeleton :rows="5" :enable-animation="false" />
+            </p>
+            <p>
+                <Skeleton :rows="2" />
+            </p>
+        </SkeletonTheme>
+
+        <div class="flex">
+            <Skeleton class="flex-child" :rows="2" />
         </div>
-        <h1 class="mb-4">
-            <Skeleton width="200" height="200" />
-        </h1>
-        <p>
-            <Skeleton :rows="3" animation-direction="alternate" />
-        </p>
+
+        <button @click="toggleProps">Toggle Props</button>
     </div>
 </template>
 
 <style>
+.flex {
+    display: flex;
+}
+.flex-child {
+    flex: 1;
+}
 .avatar {
+    display: block;
     width: 70px;
     height: 70px;
 }
