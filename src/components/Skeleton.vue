@@ -1,58 +1,71 @@
 <script lang="ts" setup>
-import { computed, inject } from 'vue'
+import { inject, computed } from 'vue'
+import { themeInjection } from '@/utils/keys'
+import { SkeletonProps } from '@/types/index.types'
 
-const themeProps = inject('themeProps', {})
-
-interface Props {
-    rows?: number
-    width?: string | number
-    height?: string | number
-    borderRadius?: string | number
-    circle?: boolean
-    containerClass?: string
-    childClass?: string
-    baseColor?: string
-    highlightColor?: string
-    animationDuration?: number
-    animationDirection?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse'
-    enableAnimation?: boolean
-    inline?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-    // Skeleton Default Props...
+const props = withDefaults(defineProps<SkeletonProps>(), {
     rows: 1,
-    // SkeletonTheme Default Props...
-    baseColor: '#ebebeb',
-    highlightColor: '#f5f5f5',
-    width: '100%',
-    height: 'inherit',
-    borderRadius: '0.25rem',
-    animationDuration: 1.5,
-    animationDirection: 'normal',
-    enableAnimation: true,
-    inline: false,
+    enableAnimation: undefined,
+    inline: undefined,
+})
+
+const theme = inject(themeInjection, {})
+
+// Hack AKA Tweak => Computed Props with default values
+const _props = computed(() => {
+    return {
+        width: props.width ?? theme.width ?? '100%',
+        height: props.height ?? theme.height ?? 'inherit',
+        borderRadius: props.borderRadius ?? theme.borderRadius ?? '0.25rem',
+        baseColor: props.baseColor ?? theme.baseColor ?? '#ebebeb',
+        highlightColor: props.highlightColor ?? theme.highlightColor ?? '#f5f5f5',
+        animationDuration: props.animationDuration ?? theme.animationDuration ?? 1.5,
+        animationDirection: props.animationDirection ?? theme.animationDirection ?? 'normal',
+        enableAnimation: props.enableAnimation ?? theme.enableAnimation ?? true,
+        inline: props.inline ?? theme.inline ?? false,
+    }
 })
 
 // Computed => Formatting Data
-const getHeight = computed<string>(() => (typeof props.height === 'number' ? `${props.height}px` : props.height))
-const getWidth = computed<string>(() => (typeof props.width === 'number' ? `${props.width}px` : props.width))
-const getBorderRadius = computed<string>(() =>
-    typeof props.borderRadius === 'number' ? `${props.borderRadius}px` : props.borderRadius
-)
-const getAnimationDuration = computed<string>(() => `${props.animationDuration}s`)
-const getAnimationStatus = computed<string>(() => (props.enableAnimation ? 'block' : 'none'))
-const getRoundedCircle = computed<string | boolean>(() => (props.circle ? 'skeleton-loading-circle' : false))
+const getHeight = computed<string>(() => {
+    const { height } = _props.value
+    return typeof height === 'number' ? `${height}px` : height
+})
+const getWidth = computed<string>(() => {
+    const { width } = _props.value
+    return typeof width === 'number' ? `${width}px` : width
+})
+
+const getBorderRadius = computed<string>(() => {
+    const { borderRadius } = _props.value
+    return typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius
+})
+const getAnimationDuration = computed<string>(() => {
+    const { animationDuration } = _props.value
+    return `${animationDuration}s`
+})
+
+const getAnimationStatus = computed<string>(() => {
+    const { enableAnimation } = _props.value
+    return enableAnimation ? 'block' : 'none'
+})
+const getRoundedCircle = computed<string | boolean>(() => {
+    const { circle } = props
+    return circle ? 'skeleton-loading-circle' : false
+})
+
+const getRows = computed<number>(() => {
+    const { rows } = props
+    return Math.floor(rows)
+})
 </script>
 
 <template>
     <span class="skeleton-container" :class="[containerClass]">
-        <pre>Child ThemeProps: {{ themeProps }}</pre>
-        <pre>Child Props: {{ props }}</pre>
-        <!-- <template v-for="index: number in rows" :key="'skeleton-loading-' + index">
+        <template v-for="index: number in getRows" :key="'skeleton-loading-' + index">
             <span class="skeleton-loading" :class="[childClass, getRoundedCircle]" v-html="'&zwnj;'"></span>
             <br v-if="!inline" />
-        </template> -->
+        </template>
     </span>
 </template>
 
@@ -64,10 +77,10 @@ const getRoundedCircle = computed<string | boolean>(() => (props.circle ? 'skele
 }
 
 .skeleton-loading {
-    --base-color: v-bind(baseColor);
-    --highlight-color: v-bind(highlightColor);
+    --base-color: v-bind(_props.baseColor);
+    --highlight-color: v-bind(_props.highlightColor);
+    --animation-direction: v-bind(_props.animationDirection);
     --animation-duration: v-bind(getAnimationDuration);
-    --animation-direction: v-bind(animationDirection);
     --pseudo-element-display: v-bind(getAnimationStatus);
 
     background-color: var(--base-color);

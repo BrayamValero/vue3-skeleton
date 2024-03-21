@@ -1,19 +1,9 @@
 <script lang="ts" setup>
+import { themeInjection } from '@/utils/keys'
+import { SkeletonThemeProps } from '@/types/index.types'
 import { provide } from 'vue'
 
-interface Props {
-    baseColor?: string
-    highlightColor?: string
-    width?: string | number
-    height?: string | number
-    borderRadius?: string | number
-    animationDuration?: number
-    animationDirection?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse'
-    enableAnimation?: boolean
-    inline?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<SkeletonThemeProps>(), {
     baseColor: '#ebebeb',
     highlightColor: '#f5f5f5',
     width: '100%',
@@ -21,18 +11,15 @@ const props = withDefaults(defineProps<Props>(), {
     borderRadius: '0.25rem',
     animationDuration: 1.5,
     animationDirection: 'normal',
-    enableAnimation: true,
-    inline: false,
+    enableAnimation: undefined,
+    inline: undefined,
 })
 
-// https://vuejs.org/guide/components/provide-inject.html#working-with-symbol-keys
-provide('themeProps', props)
+provide(themeInjection, props)
 </script>
 
 <template>
-    <div class="SkeletonTheme">
+    <div class="skeleton-theme">
         <slot></slot>
     </div>
 </template>
-
-<
