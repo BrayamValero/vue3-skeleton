@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { inject, computed } from 'vue'
+import { inject, computed, useSlots } from 'vue'
 import { ThemeInjection } from '@/utils/keys'
 import { type SkeletonProps } from '@/types/index.types'
 
@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
 })
 
 const theme = inject(ThemeInjection, {})
+const slots: any = useSlots()
 
 // Hack AKA Tweak => Computed Props with default values
 const _props = computed(() => {
@@ -58,15 +59,20 @@ const getRows = computed<number>(() => {
     const { rows } = props
     return Math.floor(rows)
 })
+
+const getLoading = computed<boolean>(() => {
+    if (slots.default) return slots.default()[0].children || false
+})
 </script>
 
 <template>
-    <span class="skeleton-container" :class="[containerClass]">
+    <span v-if="!getLoading" class="skeleton-container" :class="[containerClass]">
         <template v-for=" in getRows">
             <span class="skeleton-loading" :class="[childClass, getRoundedCircle]" v-html="'&zwnj;'"></span>
             <br v-if="!inline" />
         </template>
     </span>
+    <slot v-else></slot>
 </template>
 
 <style>

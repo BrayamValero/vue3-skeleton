@@ -1,36 +1,39 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Skeleton from '@components/Skeleton.vue'
 import SkeletonTheme from '@components/SkeletonTheme.vue'
 
-const isEnabled = ref(true)
+const title: any = ref(null)
+const description: any = ref(null)
 
-const toggleProps = () => {
-    isEnabled.value = !isEnabled.value
+const loadData = () => {
+    title.value = 'Lorem, ipsum dolor.'
+    description.value = 'Lorem ipsum dolor sit amet.'
 }
+
+onMounted(() => {
+    setTimeout(() => {
+        loadData()
+    }, 2000)
+})
 </script>
 
 <template>
     <div>
-        <picture class="avatar">
-            <Skeleton circle :width="70" :height="70" />
-        </picture>
-        <SkeletonTheme :enable-animation="isEnabled">
-            <h1><Skeleton /></h1>
-            <h2><Skeleton /></h2>
+        <SkeletonTheme>
+            <h1>
+                <Skeleton :width="120">{{ title }}</Skeleton>
+            </h1>
             <p>
-                <Skeleton :rows="5" :enable-animation="false" />
+                <Skeleton :width="80">{{ description }}</Skeleton>
             </p>
             <p>
-                <Skeleton :rows="2" />
+                <Skeleton>Hello</Skeleton>
+            </p>
+            <p>
+                <Skeleton />
             </p>
         </SkeletonTheme>
-
-        <div class="flex">
-            <Skeleton class="flex-child" :rows="2" />
-        </div>
-
-        <button @click="toggleProps">Toggle Props</button>
     </div>
 </template>
 
