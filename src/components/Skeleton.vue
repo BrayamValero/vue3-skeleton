@@ -62,13 +62,8 @@ const getRows = computed<number>(() => {
 
 <template>
     <span class="skeleton-container" :class="[containerClass]">
-        <template v-for="index in getRows">
-            <span
-                :id="'skele_' + index"
-                class="skeleton-loading"
-                :class="[childClass, getRoundedCircle]"
-                v-html="'&zwnj;'"
-            ></span>
+        <template v-for=" in getRows">
+            <span class="skeleton-loading" :class="[childClass, getRoundedCircle]" v-html="'&zwnj;'"></span>
             <br v-if="!inline" />
         </template>
     </span>
