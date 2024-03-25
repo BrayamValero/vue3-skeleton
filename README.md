@@ -2,6 +2,13 @@
 
 Build and craft amazing loading experiences that automatically adapts to your Vue app.
 
+<div align="center">
+    <h4>
+    	<a href="https://stackblitz.com/edit/vue3-skeleton?file=src%2FApp.vue">Open Stackblitz Demo</a>
+    </h4>
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXdjMnM1OWNrYmQyeTZteTQxOTJrcXVkMWpjbW4xcGNwYXNxanVyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GrHJfT7omWaebHkJ6b/giphy.gif" alt="Skeleton GIF">
+</div>
+
 This repository is inspired by [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton)
 
 ## :rocket: Install
