@@ -98,8 +98,6 @@ This code snippet ensures the generation of precisely proportioned skeletons for
 without needing any additional configuration. Moreover, it orchestrates a seamless transition, waiting until the content
 is fully loaded before concealing the Skeleton and unveiling the loaded content gracefully.
 
-Avoid creating dedicated skeleton screens; instead, fashion components with inherent skeleton states.
-
 ### :warning: Avoid the creation of dedicated skeleton screens
 
 Instead, craft components equipped with integrated skeleton states.
