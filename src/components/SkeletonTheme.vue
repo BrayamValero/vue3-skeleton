@@ -4,13 +4,6 @@ import { ThemeInjection } from '@/utils/keys'
 import { provide } from 'vue'
 
 const props = withDefaults(defineProps<SkeletonThemeProps>(), {
-    baseColor: '#ebebeb',
-    highlightColor: '#f5f5f5',
-    width: '100%',
-    height: 'inherit',
-    borderRadius: '0.25rem',
-    animationDuration: 1.5,
-    animationDirection: 'normal',
     enableAnimation: undefined,
     inline: undefined,
 })

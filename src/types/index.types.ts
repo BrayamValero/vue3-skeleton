@@ -3,8 +3,7 @@ export interface SkeletonThemeProps {
     width?: string | number
     height?: string | number
     borderRadius?: string | number
-    baseColor?: string
-    highlightColor?: string
+    backgroundColor?: string
     animationDuration?: number
     animationDirection?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse'
     enableAnimation?: boolean
