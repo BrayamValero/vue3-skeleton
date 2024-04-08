@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { inject, computed, useSlots } from 'vue'
+import { inject, computed, useSlots, type CSSProperties } from 'vue'
 import { ThemeInjection } from '@/utils/keys'
 import { type SkeletonProps } from '@/types/index.types'
 
@@ -10,65 +10,76 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
 })
 
 const theme = inject(ThemeInjection, {})
-const slots: any = useSlots()
-
-// Hack AKA Tweak => Computed Props with default values
-const _props = computed(() => {
-    return {
-        width: props.width ?? theme.width ?? '100%',
-        height: props.height ?? theme.height ?? 'inherit',
-        borderRadius: props.borderRadius ?? theme.borderRadius ?? '0.25rem',
-        baseColor: props.baseColor ?? theme.baseColor ?? '#ebebeb',
-        highlightColor: props.highlightColor ?? theme.highlightColor ?? '#f5f5f5',
-        animationDuration: props.animationDuration ?? theme.animationDuration ?? 1.5,
-        animationDirection: props.animationDirection ?? theme.animationDirection ?? 'normal',
-        enableAnimation: props.enableAnimation ?? theme.enableAnimation ?? true,
-        inline: props.inline ?? theme.inline ?? false,
-    }
-})
-
-// Computed => Formatting Data
-const getHeight = computed<string>(() => {
-    const { height } = _props.value
-    return typeof height === 'number' ? `${height}px` : height
-})
-const getWidth = computed<string>(() => {
-    const { width } = _props.value
-    return typeof width === 'number' ? `${width}px` : width
-})
-
-const getBorderRadius = computed<string>(() => {
-    const { borderRadius } = _props.value
-    return typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius
-})
-const getAnimationDuration = computed<string>(() => {
-    const { animationDuration } = _props.value
-    return `${animationDuration}s`
-})
-
-const getAnimationStatus = computed<string>(() => {
-    const { enableAnimation } = _props.value
-    return enableAnimation ? 'block' : 'none'
-})
-const getRoundedCircle = computed<string | boolean>(() => {
-    const { circle } = props
-    return circle ? 'skeleton-loading-circle' : false
-})
 
 const getRows = computed<number>(() => {
     const { rows } = props
     return Math.floor(rows)
 })
 
-const getLoading = computed<boolean>(() => {
+const slots: any = useSlots()
+
+const getLoadingStatus = computed<boolean>(() => {
     if (slots.default) return slots.default()[0].children || false
 })
+
+const getStyles = (): CSSProperties => {
+    const style = {} as CSSProperties
+
+    const width = props.width ?? theme.width ?? '100%'
+    const height = props.height ?? theme.height ?? 'inherit'
+    const circle = props.circle
+    const borderRadius = props.borderRadius ?? theme.borderRadius ?? '0.25rem'
+    const backgroundColor = props.backgroundColor ?? theme.backgroundColor ?? '#ebebeb'
+    const animationDuration = props.animationDuration ?? theme.animationDuration ?? 1.5
+    const animationDirection = props.animationDirection ?? theme.animationDirection ?? 'normal'
+    const enableAnimation = props.enableAnimation ?? theme.enableAnimation ?? true
+
+    // Width
+    if (typeof width === 'string') {
+        style.width = width
+    } else if (typeof width === 'number') {
+        style.width = `${width}px`
+    }
+
+    // Height
+    if (typeof height === 'string') {
+        style.height = height
+    } else if (typeof height === 'number') {
+        style.height = `${height}px`
+    }
+
+    // Circle
+    if (circle) {
+        style.borderRadius = '50%'
+    } else {
+        // BorderRadius
+        if (typeof borderRadius === 'string') {
+            style.borderRadius = borderRadius
+        } else if (typeof borderRadius === 'number') {
+            style.borderRadius = `${borderRadius}px`
+        }
+    }
+
+    // Background Color
+    style.backgroundColor = backgroundColor
+
+    // Animation Duration
+    style.animationDuration = `${animationDuration}s`
+
+    // Animation Direction
+    style.animationDirection = animationDirection
+
+    // Animation Play State
+    style.animationPlayState = enableAnimation ? 'running' : 'paused'
+
+    return style
+}
 </script>
 
 <template>
-    <span v-if="!getLoading" class="skeleton-container" :class="[containerClass]">
+    <span v-if="!getLoadingStatus" class="skeleton-container" :class="containerClass">
         <template v-for=" in getRows">
-            <span class="skeleton-loading" :class="[childClass, getRoundedCircle]" v-html="'&zwnj;'"></span>
+            <span :style="getStyles()" :class="['skeleton-loading', childClass]" v-html="'&zwnj;'"></span>
             <br v-if="!inline" />
         </template>
     </span>
@@ -76,57 +87,20 @@ const getLoading = computed<boolean>(() => {
 </template>
 
 <style>
-@keyframes skeleton-loading {
-    100% {
-        transform: translateX(100%);
+@keyframes placeholder-glow {
+    50% {
+        opacity: 0.2;
     }
 }
 
 .skeleton-loading {
-    --base-color: v-bind(_props.baseColor);
-    --highlight-color: v-bind(_props.highlightColor);
-    --animation-direction: v-bind(_props.animationDirection);
-    --animation-duration: v-bind(getAnimationDuration);
-    --pseudo-element-display: v-bind(getAnimationStatus);
-
-    background-color: var(--base-color);
-    width: v-bind(getWidth);
-    height: v-bind(getHeight);
-    border-radius: v-bind(getBorderRadius);
     display: inline-flex;
     line-height: 1;
     position: relative;
     user-select: none;
     overflow: hidden;
-}
-
-.skeleton-loading.skeleton-loading-circle {
-    border-radius: 50%;
-}
-
-.skeleton-loading::after {
-    content: ' ';
-    display: var(--pseudo-element-display);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(90deg, var(--base-color), var(--highlight-color), var(--base-color));
-    transform: translateX(-100%);
-
-    animation-name: skeleton-loading;
-    animation-direction: var(--animation-direction);
-    animation-duration: var(--animation-duration);
+    animation-name: placeholder-glow;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-}
-
-@media (prefers-reduced-motion) {
-    .skeleton-loading {
-        /* Disable animation */
-        --pseudo-element-display: none;
-    }
 }
 </style>

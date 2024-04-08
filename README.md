@@ -121,7 +121,7 @@ Customize individual skeletons with props, or render a SkeletonTheme to style al
 <template>
     <div class="Home">
         <!-- This applies Base Color and Highligh Color to all Skeletons -->
-        <SkeletonTheme base-color="#303030" highlight-color="#505050">
+        <SkeletonTheme background-color="#303030">
             <h1>
                 <Skeleton>{{ data.title }}</Skeleton>
             </h1>
@@ -141,12 +141,12 @@ Down bellow you can take a look at each prop available.
 
 ### `<Skeleton>`
 
-| Name           | Type      | Description                                | Default |
-| -------------- | --------- | ------------------------------------------ | ------- |
-| rows           | `number`  | Set component amount of rows               | `1`     |
-| circle         | `boolean` | Set component `border-radius` to 50%       | `false` |
-| containerClass | `string`  | Set component class to skeleton container  | `null`  |
-| childClass     | `string`  | Set component class to each skeleton child | `null`  |
+| Name           | Type      | Description                                                          | Default |
+| -------------- | --------- | -------------------------------------------------------------------- | ------- |
+| rows           | `number`  | Set component amount of rows                                         | `1`     |
+| circle         | `boolean` | Set component `border-radius` to 50%, it replaces borderRadius props | `false` |
+| containerClass | `string`  | Set component class to skeleton container                            | `null`  |
+| childClass     | `string`  | Set component class to each skeleton child                           | `null`  |
 
 ### `<Skeleton>` `<SkeletonTheme>`
 
@@ -155,8 +155,7 @@ Down bellow you can take a look at each prop available.
 | width              | `string` `number`                                  | Set component `width`, it can be either number `px` or string with its corresponding css value                        | `100%`    |
 | height             | `string` `number`                                  | Set component `height`, it can be either number `px` or string with its corresponding css value                       | `inherit` |
 | borderRadius       | `string` `number`                                  | Set component `border-radius`, it can be either number `px` or string with its corresponding css value                | `0.25rem` |
-| baseColor          | `string`                                           | Set component base color                                                                                              | `#ebebeb` |
-| highlightColor     | `string`                                           | Set component highlight color animation                                                                               | `#f5f5f5` |
+| backgroundColor    | `string`                                           | Set component `background-color`                                                                                      | `#ebebeb` |
 | animationDuration  | `number`                                           | Set component `animation-duration` in seconds                                                                         | `1.5`     |
 | animationDirection | `normal` `reverse` `alternate` `alternate-reverse` | Set component `animation-direction` [Read docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction) | `normal`  |
 | enableAnimation    | `boolean`                                          | Set component animation status                                                                                        | `true`    |
