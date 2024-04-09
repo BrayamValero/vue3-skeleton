@@ -5,7 +5,6 @@ export interface SkeletonThemeProps {
     borderRadius?: string | number
     backgroundColor?: string
     animationDuration?: number
-    animationDirection?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse'
     enableAnimation?: boolean
     inline?: boolean
 }

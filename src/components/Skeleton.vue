@@ -25,54 +25,45 @@ const getLoadingStatus = computed<boolean>(() => {
 const getStyles = (): CSSProperties => {
     const style = {} as CSSProperties
 
-    const width = props.width ?? theme.width ?? '100%'
-    const height = props.height ?? theme.height ?? 'inherit'
+    const width = props.width ?? theme.width ?? null
+    const height = props.height ?? theme.height ?? null
+    const borderRadius = props.borderRadius ?? theme.borderRadius ?? null
+    const backgroundColor = props.backgroundColor ?? theme.backgroundColor ?? null
+    const animationDuration = props.animationDuration ?? theme.animationDuration ?? null
+    const enableAnimation = props.enableAnimation ?? theme.enableAnimation ?? null
     const circle = props.circle
-    const borderRadius = props.borderRadius ?? theme.borderRadius ?? '0.25rem'
-    const backgroundColor = props.backgroundColor ?? theme.backgroundColor ?? '#ebebeb'
-    const animationDuration = props.animationDuration ?? theme.animationDuration ?? 1.5
-    const animationDirection = props.animationDirection ?? theme.animationDirection ?? 'normal'
-    const enableAnimation = props.enableAnimation ?? theme.enableAnimation ?? true
 
-    // Width
-    if (typeof width === 'string') {
-        style.width = width
-    } else if (typeof width === 'number') {
-        style.width = `${width}px`
-    }
+    // Convert Width
+    convertToPx(width, style)
 
-    // Height
-    if (typeof height === 'string') {
-        style.height = height
-    } else if (typeof height === 'number') {
-        style.height = `${height}px`
-    }
+    // Convert Height
+    convertToPx(height, style)
 
-    // Circle
-    if (circle) {
-        style.borderRadius = '50%'
-    } else {
-        // BorderRadius
-        if (typeof borderRadius === 'string') {
-            style.borderRadius = borderRadius
-        } else if (typeof borderRadius === 'number') {
-            style.borderRadius = `${borderRadius}px`
-        }
-    }
+    // Convert BorderRadius
+    convertToPx(borderRadius, style)
+
+    // Rounded Circle
+    if (circle) style.borderRadius = '50%'
 
     // Background Color
-    style.backgroundColor = backgroundColor
+    if (backgroundColor) style.backgroundColor = backgroundColor
 
     // Animation Duration
-    style.animationDuration = `${animationDuration}s`
-
-    // Animation Direction
-    style.animationDirection = animationDirection
+    if (animationDuration) style.animationDuration = `${animationDuration}s`
 
     // Animation Play State
-    style.animationPlayState = enableAnimation ? 'running' : 'paused'
+    if (enableAnimation) style.animationPlayState = enableAnimation ? 'running' : 'paused'
 
     return style
+}
+
+// Convert numbers to px
+function convertToPx(value: string | number | null, style: CSSProperties) {
+    if (typeof value === 'string') {
+        style.width = value
+    } else if (typeof value === 'number') {
+        style.width = `${value}px`
+    }
 }
 </script>
 
@@ -89,18 +80,20 @@ const getStyles = (): CSSProperties => {
 <style>
 @keyframes placeholder-glow {
     50% {
-        opacity: 0.2;
+        opacity: 0.5;
     }
 }
 
 .skeleton-loading {
+    width: 100%;
+    height: inherit;
+    border-radius: 0.25rem;
+    background-color: #e1e1e1;
     display: inline-flex;
     line-height: 1;
     position: relative;
     user-select: none;
     overflow: hidden;
-    animation-name: placeholder-glow;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
+    animation: placeholder-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 </style>

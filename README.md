@@ -150,16 +150,15 @@ Down bellow you can take a look at each prop available.
 
 ### `<Skeleton>` `<SkeletonTheme>`
 
-| Name               | Type                                               | Description                                                                                                           | Default   |
-| ------------------ | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------- |
-| width              | `string` `number`                                  | Set component `width`, it can be either number `px` or string with its corresponding css value                        | `100%`    |
-| height             | `string` `number`                                  | Set component `height`, it can be either number `px` or string with its corresponding css value                       | `inherit` |
-| borderRadius       | `string` `number`                                  | Set component `border-radius`, it can be either number `px` or string with its corresponding css value                | `0.25rem` |
-| backgroundColor    | `string`                                           | Set component `background-color`                                                                                      | `#ebebeb` |
-| animationDuration  | `number`                                           | Set component `animation-duration` in seconds                                                                         | `1.5`     |
-| animationDirection | `normal` `reverse` `alternate` `alternate-reverse` | Set component `animation-direction` [Read docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction) | `normal`  |
-| enableAnimation    | `boolean`                                          | Set component animation status                                                                                        | `true`    |
-| inline             | `boolean`                                          | Set component inline behavior                                                                                         | `false`   |
+| Name              | Type              | Description                                                                                            | Default   |
+| ----------------- | ----------------- | ------------------------------------------------------------------------------------------------------ | --------- |
+| width             | `string` `number` | Set component `width`, it can be either number `px` or string with its corresponding css value         | `100%`    |
+| height            | `string` `number` | Set component `height`, it can be either number `px` or string with its corresponding css value        | `inherit` |
+| borderRadius      | `string` `number` | Set component `border-radius`, it can be either number `px` or string with its corresponding css value | `0.25rem` |
+| backgroundColor   | `string`          | Set component `background-color`                                                                       | `#e1e1e1` |
+| animationDuration | `number`          | Set component `animation-duration` in seconds                                                          | `2`       |
+| enableAnimation   | `boolean`         | Set component animation status `running` or `paused`                                                   | `true`    |
+| inline            | `boolean`         | Set component inline behavior                                                                          | `false`   |
 
 ### Troubleshooting
 

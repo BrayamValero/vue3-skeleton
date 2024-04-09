@@ -1,7 +1,7 @@
 {
     "name": "@brayamvalero/vue3-skeleton",
     "description": "An elegant skeleton library compatible with Vue 3",
-    "version": "0.0.30",
+    "version": "0.0.31",
     "author": "Brayam Valero",
     "license": "MIT",
     "repository": {
