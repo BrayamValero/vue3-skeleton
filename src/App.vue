@@ -72,7 +72,7 @@ onMounted(() => {
             </span>
             <span>
                 <template v-if="!loading">Example</template>
-                <Skeleton v-else width="15%" inline></Skeleton>
+                <Skeleton v-else width="15%" :height="200" inline></Skeleton>
             </span>
         </section>
 

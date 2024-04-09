@@ -34,13 +34,13 @@ const getStyles = (): CSSProperties => {
     const circle = props.circle
 
     // Convert Width
-    convertToPx(width, style)
+    convertToPx(width, 'width', style)
 
     // Convert Height
-    convertToPx(height, style)
+    convertToPx(height, 'height', style)
 
     // Convert BorderRadius
-    convertToPx(borderRadius, style)
+    convertToPx(borderRadius, 'borderRadius', style)
 
     // Rounded Circle
     if (circle) style.borderRadius = '50%'
@@ -58,11 +58,11 @@ const getStyles = (): CSSProperties => {
 }
 
 // Convert numbers to px
-function convertToPx(value: string | number | null, style: CSSProperties) {
+function convertToPx(value: string | number | null, name: 'width' | 'height' | 'borderRadius', style: CSSProperties) {
     if (typeof value === 'string') {
-        style.width = value
+        style[name] = value
     } else if (typeof value === 'number') {
-        style.width = `${value}px`
+        style[name] = `${value}px`
     }
 }
 </script>
