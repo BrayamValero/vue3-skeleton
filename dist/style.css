@@ -1,0 +1,1 @@
+@keyframes placeholder-glow{50%{opacity:.5}}.skeleton-loading{width:100%;height:inherit;border-radius:.25rem;background-color:#e1e1e1;display:inline-flex;line-height:1;position:relative;-webkit-user-select:none;user-select:none;overflow:hidden;animation:placeholder-glow 2s cubic-bezier(.4,0,.6,1) infinite}
