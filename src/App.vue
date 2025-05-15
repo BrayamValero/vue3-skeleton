@@ -6,6 +6,7 @@ import SkeletonTheme from '@components/SkeletonTheme.vue'
 const data: any = ref({})
 
 const loading = ref(true)
+const manualLoading = ref(true)
 
 const fetchData = () => {
     // Title & Description
@@ -59,6 +60,29 @@ onMounted(() => {
                 </small>
             </div>
         </section>
+        <!-- User Profile manually example -->
+        <h2 class="mb-2">Inline loading with static data</h2>
+        <section class="user">
+            <picture class="user-avatar">
+                <Skeleton :loading="manualLoading" childClass="user-avatar" background-color="#666">
+                    <img :src="data.img" />
+                </Skeleton>
+            </picture>
+            <div class="user-info">
+                <h3>
+                    <Skeleton :loading="manualLoading" :width="150">{{ data.name }}</Skeleton>
+                </h3>
+                <p>
+                    <Skeleton :loading="manualLoading" :width="120">{{ data.role }}</Skeleton>
+                </p>
+                <small>
+                    <Skeleton :loading="manualLoading" :width="100">{{ data.email }}</Skeleton>
+                </small>
+            </div>
+        </section>
+
+        <button @click="manualLoading = !manualLoading">Toggle Manual Loading</button>
+
         <!-- Inline Elements -->
         <section class="inline">
             <h2 class="mb-2">Inline loading with static data</h2>
