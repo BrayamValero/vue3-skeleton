@@ -15,4 +15,5 @@ export interface SkeletonProps extends SkeletonThemeProps {
     circle?: boolean
     containerClass?: string
     childClass?: string
+    loading?: boolean
 }

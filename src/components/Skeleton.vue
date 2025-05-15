@@ -7,6 +7,7 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
     rows: 1,
     enableAnimation: undefined,
     inline: undefined,
+    loading: undefined
 })
 
 const theme = inject(ThemeInjection, {})
@@ -19,6 +20,8 @@ const getRows = computed<number>(() => {
 const slots: any = useSlots()
 
 const getLoadingStatus = computed<boolean>(() => {
+    if (props.loading !== undefined) return !props.loading
+    
     if (slots.default) return slots.default()[0].children || false
 })
 

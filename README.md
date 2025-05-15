@@ -98,6 +98,23 @@ This code snippet ensures the generation of precisely proportioned skeletons for
 without needing any additional configuration. Moreover, it orchestrates a seamless transition, waiting until the content
 is fully loaded before concealing the Skeleton and unveiling the loaded content gracefully.
 
+#### Manual Loading
+
+Use the `loading` prop to manually control the loading state of the skeleton.
+
+```html
+<template>
+    <div class="Home">
+        <h1>
+            <Skeleton :loading="loading">{{ data.title }}</Skeleton>
+        </h1>
+        <p>
+            <Skeleton :loading="loading" :rows="3">{{ data.description }}</Skeleton>
+        </p>
+    </div>
+</template>
+```
+
 ### :warning: Avoid the creation of dedicated skeleton screens
 
 Instead, craft components equipped with integrated skeleton states.
@@ -147,6 +164,7 @@ Down bellow you can take a look at each prop available.
 | circle         | `boolean` | Set component `border-radius` to 50%, it replaces borderRadius props | `false` |
 | containerClass | `string`  | Set component class to skeleton container                            | `null`  |
 | childClass     | `string`  | Set component class to each skeleton child                           | `null`  |
+| loading        | `boolean` | Set component loading state                                          | `undefined` |
 
 ### `<Skeleton>` `<SkeletonTheme>`
 
