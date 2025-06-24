@@ -3,10 +3,13 @@ export interface SkeletonThemeProps {
     width?: string | number
     height?: string | number
     borderRadius?: string | number
-    backgroundColor?: string
-    animationDuration?: number
     enableAnimation?: boolean
     inline?: boolean
+    baseColor?: string
+    highlightColor?: string
+    animationDuration?: number
+    animationDirection?: 'normal' | 'reverse'
+    customHighlightBackground?: string
 }
 
 // Exclusive Props from Skeleton

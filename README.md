@@ -138,7 +138,7 @@ Customize individual skeletons with props, or render a SkeletonTheme to style al
 <template>
     <div class="Home">
         <!-- This applies Base Color and Highligh Color to all Skeletons -->
-        <SkeletonTheme background-color="#303030">
+        <SkeletonTheme base-color="#303030" highlight-color="#606060">
             <h1>
                 <Skeleton>{{ data.title }}</Skeleton>
             </h1>
@@ -158,25 +158,42 @@ Down bellow you can take a look at each prop available.
 
 ### `<Skeleton>`
 
-| Name           | Type      | Description                                                          | Default |
-| -------------- | --------- | -------------------------------------------------------------------- | ------- |
-| rows           | `number`  | Set component amount of rows                                         | `1`     |
-| circle         | `boolean` | Set component `border-radius` to 50%, it replaces borderRadius props | `false` |
-| containerClass | `string`  | Set component class to skeleton container                            | `null`  |
-| childClass     | `string`  | Set component class to each skeleton child                           | `null`  |
+| Name           | Type      | Description                                                          | Default     |
+| -------------- | --------- | -------------------------------------------------------------------- | ----------- |
+| rows           | `number`  | Set component amount of rows                                         | `1`         |
+| circle         | `boolean` | Set component `border-radius` to 50%, it replaces borderRadius props | `false`     |
+| containerClass | `string`  | Set component class to skeleton container                            | `null`      |
+| childClass     | `string`  | Set component class to each skeleton child                           | `null`      |
 | loading        | `boolean` | Set component loading state                                          | `undefined` |
 
 ### `<Skeleton>` `<SkeletonTheme>`
 
-| Name              | Type              | Description                                                                                            | Default   |
-| ----------------- | ----------------- | ------------------------------------------------------------------------------------------------------ | --------- |
-| width             | `string` `number` | Set component `width`, it can be either number `px` or string with its corresponding css value         | `100%`    |
-| height            | `string` `number` | Set component `height`, it can be either number `px` or string with its corresponding css value        | `inherit` |
-| borderRadius      | `string` `number` | Set component `border-radius`, it can be either number `px` or string with its corresponding css value | `0.25rem` |
-| backgroundColor   | `string`          | Set component `background-color`                                                                       | `#e1e1e1` |
-| animationDuration | `number`          | Set component `animation-duration` in seconds                                                          | `2`       |
-| enableAnimation   | `boolean`         | Set component animation status `running` or `paused`                                                   | `true`    |
-| inline            | `boolean`         | Set component inline behavior                                                                          | `false`   |
+| Name                      | Type               | Description                                                                                                      | Default     |
+| ------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------- | ----------- |
+| width                     | `string` `number`  | Set component `width`, it can be either number `px` or string with its corresponding css value                   | `100%`      |
+| height                    | `string` `number`  | Set component `height`, it can be either number `px` or string with its corresponding css value                  | `inherit`   |
+| borderRadius              | `string` `number`  | Set component `border-radius`, it can be either number `px` or string with its corresponding css value           | `0.25rem`   |
+| baseColor                 | `string`           | Set component `background-color`                                                                                 | `#ebebeb`   |
+| highlightColor            | `string`           | Set component `background-image` highlight color animation                                                       | `#ebebeb`   |
+| animationDuration         | `number`           | Set component `animation-duration` in seconds                                                                    | `#f5f5f5`   |
+| animationDirection        | `normal` `reverse` | Set component animation direction `normal` (left to right) or `reverse` (right to left)                          | `normal`    |
+| enableAnimation           | `boolean`          | Set component animation status `running` or `paused`                                                             | `true`      |
+| inline                    | `boolean`          | Set component inline behavior                                                                                    | `false`     |
+| customHighlightBackground | `string`           | Override the `background-image` property of the highlight element, enabling you to fully customize the gradient. | `undefined` |
+
+#### Custom Highlight Background
+
+You may want to make the gradient used in the highlight element narrower or wider. To do this, you can set the
+customHighlightBackground prop. Here's an example of a narrow highlight:
+
+```html
+<Skeleton custom-highlight-background="linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)">
+    Loading...
+</Skeleton>
+```
+
+If you use this prop, the baseColor and highlightColor props are ignored, but you can still reference their
+corresponding CSS variables as shown in the above example.
 
 ### Troubleshooting
 

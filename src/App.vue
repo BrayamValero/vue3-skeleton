@@ -45,7 +45,7 @@ onMounted(() => {
         <!-- User Profile example -->
         <section class="user">
             <picture class="user-avatar">
-                <Skeleton v-if="!data.img" childClass="user-avatar" background-color="#666" />
+                <Skeleton v-if="!data.img" childClass="user-avatar" />
                 <img v-else :src="data.img" />
             </picture>
             <div class="user-info">
@@ -64,7 +64,7 @@ onMounted(() => {
         <h2 class="mb-2">Inline loading with static data</h2>
         <section class="user">
             <picture class="user-avatar">
-                <Skeleton :loading="manualLoading" childClass="user-avatar" background-color="#666">
+                <Skeleton :loading="manualLoading" childClass="user-avatar">
                     <img :src="data.img" />
                 </Skeleton>
             </picture>
